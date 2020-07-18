@@ -16,16 +16,16 @@ function getXYCordinateOfFood() {
 function updateLinkLocation(link) {
     switch(link.direction) {
         case 'R':
-            link.x += link.width;
+            link.x += LINK_WIDTH;
             break;
         case 'L':
-            link.x -= link.width;
+            link.x -= LINK_WIDTH;
             break;
         case 'U':
-            link.y -= link.height;
+            link.y -= LINK_HEIGHT;
             break;
         case 'D':
-            link.y += link.height;
+            link.y += LINK_HEIGHT;
             break;
         default:
             break;

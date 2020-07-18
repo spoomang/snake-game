@@ -17,14 +17,14 @@ function resize() {
 
 function GameBasic() {
     this.links = [];
-    const head = new Link(LINK_WIDTH * 2 + BORDER_MARGIN, BORDER_MARGIN, true, 'R');
-    const tail = new Link(BORDER_MARGIN, BORDER_MARGIN, false, 'R', true)
+    const head = new Link(LINK_WIDTH * 2 + BORDER_MARGIN, BORDER_MARGIN, 'R');
+    const tail = new Link(BORDER_MARGIN, BORDER_MARGIN, 'R')
 
     this.head = head;
     this.tail = tail;
 
     this.links.push(this.head);
-    this.links.push(new Link(LINK_WIDTH + BORDER_MARGIN, BORDER_MARGIN, false, 'R'));
+    this.links.push(new Link(LINK_WIDTH + BORDER_MARGIN, BORDER_MARGIN, 'R'));
     this.links.push(this.tail);
 
     this.speed = 300;
@@ -46,19 +46,19 @@ GameBasic.prototype.updateFood = function() {
 
 GameBasic.prototype.growIfAteFood = function(){
     if(ateFood(this.head.x, this.head.y, this.food.x, this.food.y)) {
-        const newLink = new Link(this.tail.x, this.tail.y, false, this.tail.direction, true);
+        const newLink = new Link(this.tail.x, this.tail.y, this.tail.direction);
         switch(newLink.direction) {
             case 'R':
-                newLink.x -= newLink.width;
+                newLink.x -= LINK_WIDTH;
                 break;
             case 'L':
-                newLink.x += newLink.width;
+                newLink.x += LINK_WIDTH;
                 break;
             case 'U':
-                newLink.y += newLink.height;
+                newLink.y += LINK_HEIGHT;
                 break;
             case 'D':
-                newLink.y -= newLink.height;
+                newLink.y -= LINK_HEIGHT;
                 break;
             default:
                 break;
