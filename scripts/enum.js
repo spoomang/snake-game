@@ -5,3 +5,9 @@ const LINK_WIDTH = 34;
 const LINK_HEIGHT = 34;
 
 const BORDER_MARGIN = 1;
+
+// Directions
+const DIRECTION_LEFT = "LEFT";
+const DIRECTION_RIGHT = "RIGHT";
+const DIRECTION_UP = "UP";
+const DIRECTION_DOWN = "DOWN";

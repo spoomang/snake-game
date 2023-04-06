@@ -1,8 +1,8 @@
-function Link(x, y, direction) {
+function Link(x, y, direction, imageSrc) {
     this.x = x;
     this.y = y;
     this.image = new Image();
-    this.image.src = 'images/link.png';
+    this.image.src = imageSrc;
     this.direction = direction;
     return this;
 }

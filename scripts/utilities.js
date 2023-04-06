@@ -15,29 +15,29 @@ function getXYCordinateOfFood() {
 
 function updateLinkLocation(link) {
     switch(link.direction) {
-        case 'R':
+        case DIRECTION_RIGHT:
             link.x += LINK_WIDTH;
             break;
-        case 'L':
+        case DIRECTION_LEFT:
             link.x -= LINK_WIDTH;
             break;
-        case 'U':
+        case DIRECTION_UP:
             link.y -= LINK_HEIGHT;
             break;
-        case 'D':
+        case DIRECTION_DOWN:
             link.y += LINK_HEIGHT;
             break;
         default:
             break;
     }
 
-    if(link.x > CANVAS_WIDTH) {
+    if(link.x + LINK_WIDTH > CANVAS_WIDTH) {
         link.x = BORDER_MARGIN;
     } else if(link.x < BORDER_MARGIN) {
         link.x = CANVAS_WIDTH - (LINK_WIDTH + BORDER_MARGIN);
     }
 
-    if(link.y > CANVAS_HEIGHT) {
+    if(link.y + LINK_HEIGHT > CANVAS_HEIGHT) {
         link.y = BORDER_MARGIN;
     } else if(link.y < BORDER_MARGIN) {
         link.y = CANVAS_HEIGHT - (LINK_HEIGHT + BORDER_MARGIN);
