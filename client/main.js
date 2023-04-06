@@ -1,3 +1,7 @@
+const {CANVAS_WIDTH, CANVAS_HEIGHT, LINK_WIDTH} = require('./enums/length');
+const SnakePlayer = require('./player');
+const Game = require('./game');
+
 const canvas = document.getElementById('snakeCanvas');
 
 canvas.width = CANVAS_WIDTH;

@@ -1,3 +1,6 @@
+const { CANVAS_HEIGHT, CANVAS_WIDTH, LINK_HEIGHT, LINK_WIDTH, BORDER_MARGIN } = require('./enums/length');
+const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = require('./enums/direction');
+
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
 }
@@ -42,5 +45,12 @@ function updateLinkLocation(link) {
     } else if(link.y < BORDER_MARGIN) {
         link.y = CANVAS_HEIGHT - (LINK_HEIGHT + BORDER_MARGIN);
     }
-
 }
+
+module.exports = {
+    getRndInteger,
+    ateFood,
+    getXYCordinateOfFood,
+    updateLinkLocation,
+};
+

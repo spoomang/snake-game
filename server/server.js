@@ -7,7 +7,14 @@ const {getContentType, getFilePath} = require('./utils/utils');
 const PORT = 8080;
 
 http.createServer((request, response) => {
-    const filePath = getFilePath(request.url);
+    let filePath;
+
+    const url = request.url;
+    if (url === '/') {
+        filePath = './dist/index.html';
+    } else {
+        filePath = getFilePath(url);
+    }
 
     fs.readFile(filePath, function(error, content) {
         const contentType = getContentType(filePath);

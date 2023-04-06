@@ -1,3 +1,9 @@
+const { LINK_HEIGHT, LINK_WIDTH, BORDER_MARGIN } = require('./enums/length');
+const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = require('./enums/direction');
+
+const Link = require('./objects');
+const { ateFood, updateLinkLocation } = require('./utilities');
+
 function SnakePlayer(imageSrc, automated, ctx, initialPositionX, initialPositionY) {
     let startPositionX = !!initialPositionX ? initialPositionX : 0;
     let startPositionY = !!initialPositionY ? initialPositionY : 0;
@@ -120,3 +126,4 @@ SnakePlayer.prototype.automate = function() {
     }
 }
 
+module.exports = SnakePlayer;

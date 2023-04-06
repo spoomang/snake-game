@@ -6,3 +6,5 @@ function Link(x, y, direction, imageSrc) {
     this.direction = direction;
     return this;
 }
+
+module.exports = Link;

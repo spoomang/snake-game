@@ -1,3 +1,7 @@
+const { CANVAS_HEIGHT, CANVAS_WIDTH } = require('./enums/length');
+const { getXYCordinateOfFood } = require('./utilities');
+const Link = require('./objects');
+
 function Game(players, ctx, imageSrc) {
     this.players = players;
     this.ctx = ctx;
@@ -19,7 +23,7 @@ Game.prototype.updateFood = function() {
 Game.prototype.start = function() {
     setInterval(() => {
         // 1. Clear canvas.
-        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         for (const player of this.players) {
 
             // 2. Update Location of food.
@@ -46,3 +50,5 @@ Game.prototype.start = function() {
         }
     }
 }
+
+module.exports = Game;
