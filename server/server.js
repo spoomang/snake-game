@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const {getContentType, getFilePath} = require('./utilities/utilities');
+const {getContentType, getFilePath} = require('./utils/utils');
 
 const PORT = 8080;
 
