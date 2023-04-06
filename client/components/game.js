@@ -1,6 +1,6 @@
-const { CANVAS_HEIGHT, CANVAS_WIDTH } = require('./enums/length');
-const { getXYCordinateOfFood } = require('./utilities');
-const Link = require('./objects');
+const { CANVAS_HEIGHT, CANVAS_WIDTH } = require('../enums/length');
+const { getXYCordinateOfFood } = require('../utilities/utilities');
+const Link = require('../model/objects');
 
 function Game(players, ctx, imageSrc) {
     this.players = players;
