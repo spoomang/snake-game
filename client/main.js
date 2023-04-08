@@ -26,4 +26,3 @@ players = [playerManual, playerAutomated];
 
 const game = new Game(players, ctx, 'images/link.png');
 game.start();
-
