@@ -1,8 +1,10 @@
+const Link = require('../model/objects');
+const FoodController = require('../controller/food');
+
+const { ateFood, updateLinkLocation } = require('../utilities/utilities');
 const { LINK_HEIGHT, LINK_WIDTH, BORDER_MARGIN } = require('../enums/length');
 const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = require('../enums/direction');
 
-const Link = require('../model/objects');
-const { ateFood, updateLinkLocation } = require('../utilities/utilities');
 
 function SnakePlayer({ imageSrc, automated, ctx, initialPositionX, initialPositionY }) {
     let startPositionX = !!initialPositionX ? initialPositionX : 0;
@@ -27,7 +29,7 @@ function SnakePlayer({ imageSrc, automated, ctx, initialPositionX, initialPositi
 }
 
 SnakePlayer.prototype.growIfAteFood = function(){
-    if(ateFood(this.head.x, this.head.y, this.food.x, this.food.y)) {
+    if(ateFood(this.head.x, this.head.y, FoodController.food.x, FoodController.food.y)) {
         const newLink = new Link(this.tail.x, this.tail.y, this.tail.direction, this.imageSrc);
         switch(newLink.direction) {
             case DIRECTION_RIGHT:
@@ -49,7 +51,7 @@ SnakePlayer.prototype.growIfAteFood = function(){
         this.tail = newLink;
         this.links.push(newLink);
 
-        this.food = null;
+        FoodController.food = null;
     }
 }
 

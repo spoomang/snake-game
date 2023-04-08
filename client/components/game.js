@@ -1,7 +1,7 @@
 const { CANVAS_HEIGHT, CANVAS_WIDTH } = require('../enums/length');
 const { EVENT_TYPES } = require('../enums/events');
 const Event = require('../event/event');
-const FoodComponent = require('./food');
+const FoodController = require('../controller/food');
 
 function Game({ ctx, contollers }) {
     this.contollers = contollers;
@@ -17,10 +17,10 @@ Game.prototype.start = function() {
         for (const contoller of this.contollers) {
             const player = contoller.player;
             // 2. Update Location of food.
-            FoodComponent.updateFood();
+            FoodController.updateFood();
     
             // 3. Grow if snake eats food.
-            // game.growIfAteFood();
+            player.growIfAteFood();
     
             // 4. Update snakes new location.
             player.updateSnakeLocation();

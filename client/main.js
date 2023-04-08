@@ -1,10 +1,10 @@
 const {CANVAS_WIDTH, CANVAS_HEIGHT, LINK_WIDTH} = require('./enums/length');
 const { EVENT_TYPES } = require('./enums/events');
 
-const SnakePlayer = require('./components/player');
+const SnakePlayer = require('./components/snake');
 const Game = require('./components/game');
-const SnakeController = require('./controller/controller');
-const FoodComponent = require('./components/food');
+const SnakeController = require('./controller/snake');
+const FoodController = require('./controller/food');
 
 const Event = require('./event/event');
 
@@ -49,7 +49,7 @@ const contollers = [controllerManual, controllerAutomated];
 Event.addListener(EVENT_TYPES.UPDATE_FOOD, () => console.log('update food event triggered...'))
 Event.addListener(EVENT_TYPES.GAME_STARTED, () => console.log('game started ...'))
 
-FoodComponent.setParams({ ctx, foodImageSrc: 'images/link.png' })
+FoodController.setParams({ ctx, foodImageSrc: 'images/link.png' })
 
 const game = new Game({
     ctx, 
