@@ -4,7 +4,7 @@ const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = requir
 const Link = require('../model/objects');
 const { ateFood, updateLinkLocation } = require('../utilities/utilities');
 
-function SnakePlayer(imageSrc, automated, ctx, initialPositionX, initialPositionY) {
+function SnakePlayer({ imageSrc, automated, ctx, initialPositionX, initialPositionY }) {
     let startPositionX = !!initialPositionX ? initialPositionX : 0;
     let startPositionY = !!initialPositionY ? initialPositionY : 0;
 

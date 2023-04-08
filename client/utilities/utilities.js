@@ -47,10 +47,16 @@ function updateLinkLocation(link) {
     }
 }
 
+function createImage(imageSrc) {
+    const image = new Image();
+    image.src = imageSrc;
+}
+
 module.exports = {
     getRndInteger,
     ateFood,
     getXYCordinateOfFood,
     updateLinkLocation,
+    createImage,
 };
 

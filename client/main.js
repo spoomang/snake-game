@@ -20,8 +20,20 @@ function resize() {
 }
 window.addEventListener('load', resize, false);
 
-const playerAutomated = new SnakePlayer('images/link.png', true, ctx, 0, 0);
-const playerManual = new SnakePlayer('images/link.png', false, ctx, 0, 4 * LINK_WIDTH);
+const playerAutomated = new SnakePlayer({
+    imageSrc: 'images/link.png',
+    automated: true, 
+    ctx,
+    initialPositionX: 0,
+    initialPositionY: 0,
+});
+const playerManual = new SnakePlayer({
+    imageSrc: 'images/link.png', 
+    automated: false,
+    ctx, 
+    initialPositionX: 0,
+    initialPositionY: 4 * LINK_WIDTH,
+});
 players = [playerManual, playerAutomated];
 
 const game = new Game(players, ctx, 'images/link.png');
