@@ -49,5 +49,9 @@ const contollers = [controllerManual, controllerAutomated];
 Event.addListener(EVENT_TYPES.UPDATE_FOOD, () => console.log('update food event triggered...'))
 Event.addListener(EVENT_TYPES.GAME_STARTED, () => console.log('game started ...'))
 
-const game = new Game(players, ctx, 'images/link.png', contollers);
+const game = new Game({
+    ctx, 
+    foodImageSrc: 'images/link.png',
+    contollers
+});
 game.start();

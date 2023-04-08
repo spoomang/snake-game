@@ -6,10 +6,9 @@ const { getXYCordinateOfFood } = require('../utilities/utilities');
 const Event = require('../event/event');
 const Link = require('../model/objects');
 
-function Game(players, ctx, imageSrc, contollers) {
-    this.players = players;
+function Game({ ctx, foodImageSrc, contollers }) {
     this.ctx = ctx;
-    this.imageSrc = imageSrc;
+    this.foodImageSrc = foodImageSrc;
     this.contollers = contollers;
 }
 
@@ -18,7 +17,7 @@ Game.prototype.updateFood = function() {
         const cordinates = getXYCordinateOfFood();
         const x = cordinates[0];
         const y = cordinates[1];
-        const food = new Link(x, y, false, this.imageSrc);
+        const food = new Link(x, y, false, this.foodImageSrc);
         this.food = food;
     }
 
@@ -33,8 +32,8 @@ Game.prototype.start = function() {
     setInterval(() => {
         // 1. Clear canvas.
         this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        for (const player of this.players) {
-
+        for (const contoller of this.contollers) {
+            const player = contoller.player;
             // 2. Update Location of food.
             this.updateFood();
     

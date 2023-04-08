@@ -27,7 +27,9 @@ describe('Game', function () {
             x: 1,
             y: 10,
         }
-        const game = new Game(null, dummyContext, '');
+        const game = new Game({
+            ctx: dummyContext,
+        });
         game.food = food;
 
         game.updateFood();
@@ -38,7 +40,9 @@ describe('Game', function () {
     it('should call context as expected with food', function () {
         sandbox.stub(Utilities, 'createImage');
 
-        const game = new Game(null, dummyContext, '');
+        const game = new Game({
+            ctx: dummyContext,
+        });
 
         game.updateFood();
 
