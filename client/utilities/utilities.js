@@ -1,3 +1,6 @@
+const { CANVAS_HEIGHT, CANVAS_WIDTH, LINK_HEIGHT, LINK_WIDTH, BORDER_MARGIN } = require('../enums/length');
+const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = require('../enums/direction');
+
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
 }
@@ -15,32 +18,46 @@ function getXYCordinateOfFood() {
 
 function updateLinkLocation(link) {
     switch(link.direction) {
-        case 'R':
+        case DIRECTION_RIGHT:
             link.x += LINK_WIDTH;
             break;
-        case 'L':
+        case DIRECTION_LEFT:
             link.x -= LINK_WIDTH;
             break;
-        case 'U':
+        case DIRECTION_UP:
             link.y -= LINK_HEIGHT;
             break;
-        case 'D':
+        case DIRECTION_DOWN:
             link.y += LINK_HEIGHT;
             break;
         default:
             break;
     }
 
-    if(link.x > CANVAS_WIDTH) {
+    if(link.x + LINK_WIDTH > CANVAS_WIDTH) {
         link.x = BORDER_MARGIN;
     } else if(link.x < BORDER_MARGIN) {
         link.x = CANVAS_WIDTH - (LINK_WIDTH + BORDER_MARGIN);
     }
 
-    if(link.y > CANVAS_HEIGHT) {
+    if(link.y + LINK_HEIGHT > CANVAS_HEIGHT) {
         link.y = BORDER_MARGIN;
     } else if(link.y < BORDER_MARGIN) {
         link.y = CANVAS_HEIGHT - (LINK_HEIGHT + BORDER_MARGIN);
     }
-
 }
+
+function createImage(imageSrc) {
+    const image = new Image();
+    image.src = imageSrc;
+    return image;
+}
+
+module.exports = {
+    getRndInteger,
+    ateFood,
+    getXYCordinateOfFood,
+    updateLinkLocation,
+    createImage,
+};
+

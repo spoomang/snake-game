@@ -1,7 +1,0 @@
-const CANVAS_WIDTH = 920;
-const CANVAS_HEIGHT = 750;
-
-const LINK_WIDTH = 34;
-const LINK_HEIGHT = 34;
-
-const BORDER_MARGIN = 1;
