@@ -64,39 +64,4 @@ SnakePlayer.prototype.updateSnakeLocation = function() {
     }
 }
 
-SnakePlayer.prototype.onKeyDown = function(keyCode) {
-    if (this.automated) {
-        return
-    }
-
-    let x, y, direction;
-    const currentDirection = this.head.direction;
-    switch(keyCode) {
-        case 40:
-            if (currentDirection == DIRECTION_LEFT || currentDirection == DIRECTION_RIGHT) {
-                this.head.direction = DIRECTION_DOWN;
-            }
-            break;
-        case 39:
-            if (currentDirection == DIRECTION_UP || currentDirection == DIRECTION_DOWN) {
-                this.head.direction = DIRECTION_RIGHT;
-            }
-            break;
-        case 38:
-            if (currentDirection == DIRECTION_LEFT || currentDirection == DIRECTION_RIGHT) {
-                this.head.direction = DIRECTION_UP;
-            }
-            break;
-        case 37:
-            if (currentDirection == DIRECTION_UP || currentDirection == DIRECTION_DOWN) {
-                this.head.direction = DIRECTION_LEFT;
-            }
-            break;
-        case 32:
-            this.pause = !this.pause;
-        default:
-            break;
-    }
-}
-
 module.exports = SnakePlayer;
