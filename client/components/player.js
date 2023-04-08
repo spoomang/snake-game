@@ -99,31 +99,4 @@ SnakePlayer.prototype.onKeyDown = function(keyCode) {
     }
 }
 
-SnakePlayer.prototype.automate = function() {
-    const randomNum = Math.floor(Math.random() * 2);
-
-    switch(this.head.direction) {
-        case DIRECTION_LEFT:
-        case DIRECTION_RIGHT:
-            if (randomNum == 0) {
-                this.head.direction = DIRECTION_UP;
-            } else {
-                this.head.direction = DIRECTION_DOWN;
-            }
-
-            break;
-        case DIRECTION_DOWN:
-        case DIRECTION_UP:
-            if (randomNum == 0) {
-                this.head.direction = DIRECTION_LEFT;
-            } else {
-                this.head.direction = DIRECTION_RIGHT;
-            }
-            break;
-    
-        default:
-            break;
-    }
-}
-
 module.exports = SnakePlayer;

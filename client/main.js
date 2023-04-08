@@ -3,6 +3,7 @@ const { EVENT_TYPES } = require('./enums/events');
 
 const SnakePlayer = require('./components/player');
 const Game = require('./components/game');
+const SnakeController = require('./controller/snake_controller');
 
 const Event = require('./event/event');
 
@@ -38,10 +39,15 @@ const playerManual = new SnakePlayer({
     initialPositionX: 0,
     initialPositionY: 4 * LINK_WIDTH,
 });
-players = [playerManual, playerAutomated];
+const players = [playerManual, playerAutomated];
+
+const controllerAutomated = new SnakeController(playerAutomated);
+const controllerManual = new SnakeController(playerManual);
+
+const contollers = [controllerManual, controllerAutomated];
 
 Event.addListener(EVENT_TYPES.UPDATE_FOOD, () => console.log('update food event triggered...'))
-Event.addListener(EVENT_TYPES.GAME_STARTED, () => console.log('game started...'))
+Event.addListener(EVENT_TYPES.GAME_STARTED, () => console.log('game started ...'))
 
-const game = new Game(players, ctx, 'images/link.png');
+const game = new Game(players, ctx, 'images/link.png', contollers);
 game.start();

@@ -6,10 +6,11 @@ const { getXYCordinateOfFood } = require('../utilities/utilities');
 const Event = require('../event/event');
 const Link = require('../model/objects');
 
-function Game(players, ctx, imageSrc) {
+function Game(players, ctx, imageSrc, contollers) {
     this.players = players;
     this.ctx = ctx;
     this.imageSrc = imageSrc;
+    this.contollers = contollers;
 }
 
 Game.prototype.updateFood = function() {
@@ -45,15 +46,15 @@ Game.prototype.start = function() {
         }
     }, 200);
 
-    for (const player of this.players) {
-        if (player.automated) {
+    for (const controller of this.contollers) {
+        if (controller.automated) {
             setInterval(() => {
-                player.automate();
+                controller.automate();
             }, 2000);
         } else {
             window.addEventListener('keydown', (e) => {
                 const keyCode = e.which || event.keyCode;
-                player.onKeyDown(keyCode);
+                controller.manual(keyCode);
             });
         }
     }
