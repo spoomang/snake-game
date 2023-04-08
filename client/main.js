@@ -23,14 +23,14 @@ window.addEventListener('load', resize, false);
 const playerAutomated = new SnakePlayer({
     imageSrc: 'images/link.png',
     automated: true, 
-    ctx,
+    ctx: ctx,
     initialPositionX: 0,
     initialPositionY: 0,
 });
 const playerManual = new SnakePlayer({
     imageSrc: 'images/link.png', 
     automated: false,
-    ctx, 
+    ctx: ctx, 
     initialPositionX: 0,
     initialPositionY: 4 * LINK_WIDTH,
 });
