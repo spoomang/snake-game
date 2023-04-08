@@ -1,29 +1,11 @@
 const { CANVAS_HEIGHT, CANVAS_WIDTH } = require('../enums/length');
 const { EVENT_TYPES } = require('../enums/events');
-
-const { getXYCordinateOfFood } = require('../utilities/utilities');
-
 const Event = require('../event/event');
-const Link = require('../model/objects');
+const FoodController = require('../controller/food');
 
-function Game({ ctx, foodImageSrc, contollers }) {
-    this.ctx = ctx;
-    this.foodImageSrc = foodImageSrc;
+function Game({ ctx, contollers }) {
     this.contollers = contollers;
-}
-
-Game.prototype.updateFood = function() {
-    if(!this.food) {
-        const cordinates = getXYCordinateOfFood();
-        const x = cordinates[0];
-        const y = cordinates[1];
-        const food = new Link(x, y, false, this.foodImageSrc);
-        this.food = food;
-    }
-
-    Event.emit(EVENT_TYPES.UPDATE_FOOD, { food: this.food });
-
-    this.ctx.drawImage(this.food.image, this.food.x, this.food.y);
+    this.ctx = ctx;
 }
 
 Game.prototype.start = function() {
@@ -35,10 +17,10 @@ Game.prototype.start = function() {
         for (const contoller of this.contollers) {
             const player = contoller.player;
             // 2. Update Location of food.
-            this.updateFood();
+            FoodController.updateFood();
     
             // 3. Grow if snake eats food.
-            // game.growIfAteFood();
+            player.growIfAteFood();
     
             // 4. Update snakes new location.
             player.updateSnakeLocation();

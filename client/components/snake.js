@@ -1,8 +1,10 @@
+const Link = require('../model/objects');
+const FoodController = require('../controller/food');
+
+const { ateFood, updateLinkLocation } = require('../utilities/utilities');
 const { LINK_HEIGHT, LINK_WIDTH, BORDER_MARGIN } = require('../enums/length');
 const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = require('../enums/direction');
 
-const Link = require('../model/objects');
-const { ateFood, updateLinkLocation } = require('../utilities/utilities');
 
 function SnakePlayer({ imageSrc, automated, ctx, initialPositionX, initialPositionY }) {
     let startPositionX = !!initialPositionX ? initialPositionX : 0;
@@ -27,7 +29,7 @@ function SnakePlayer({ imageSrc, automated, ctx, initialPositionX, initialPositi
 }
 
 SnakePlayer.prototype.growIfAteFood = function(){
-    if(ateFood(this.head.x, this.head.y, this.food.x, this.food.y)) {
+    if(ateFood(this.head.x, this.head.y, FoodController.food.x, FoodController.food.y)) {
         const newLink = new Link(this.tail.x, this.tail.y, this.tail.direction, this.imageSrc);
         switch(newLink.direction) {
             case DIRECTION_RIGHT:
@@ -49,7 +51,7 @@ SnakePlayer.prototype.growIfAteFood = function(){
         this.tail = newLink;
         this.links.push(newLink);
 
-        this.food = null;
+        FoodController.food = null;
     }
 }
 
@@ -61,41 +63,6 @@ SnakePlayer.prototype.updateSnakeLocation = function() {
 
     for(let i = this.links.length - 1; i > 0; i--) {
         this.links[i].direction = this.links[i - 1].direction;
-    }
-}
-
-SnakePlayer.prototype.onKeyDown = function(keyCode) {
-    if (this.automated) {
-        return
-    }
-
-    let x, y, direction;
-    const currentDirection = this.head.direction;
-    switch(keyCode) {
-        case 40:
-            if (currentDirection == DIRECTION_LEFT || currentDirection == DIRECTION_RIGHT) {
-                this.head.direction = DIRECTION_DOWN;
-            }
-            break;
-        case 39:
-            if (currentDirection == DIRECTION_UP || currentDirection == DIRECTION_DOWN) {
-                this.head.direction = DIRECTION_RIGHT;
-            }
-            break;
-        case 38:
-            if (currentDirection == DIRECTION_LEFT || currentDirection == DIRECTION_RIGHT) {
-                this.head.direction = DIRECTION_UP;
-            }
-            break;
-        case 37:
-            if (currentDirection == DIRECTION_UP || currentDirection == DIRECTION_DOWN) {
-                this.head.direction = DIRECTION_LEFT;
-            }
-            break;
-        case 32:
-            this.pause = !this.pause;
-        default:
-            break;
     }
 }
 

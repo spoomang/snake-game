@@ -1,7 +1,7 @@
 const assert = require('assert');
 const sinon = require('sinon')
 
-const Player = require('../../../client/components/player');
+const Player = require('../../../client/components/snake');
 const Utilities = require('../../../client/utilities/utilities');
 
 const sandbox = sinon.createSandbox();

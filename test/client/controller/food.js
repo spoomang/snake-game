@@ -1,12 +1,12 @@
 const assert = require('assert');
 const sinon = require('sinon')
 
-const Game = require('../../../client/components/game');
+const FoodComponent = require('../../../client/controller/food');
 const Utilities = require('../../../client/utilities/utilities');
 
 const sandbox = sinon.createSandbox();
 
-describe('Game', function () {
+describe('FoodComponent', function () {
   afterEach(() => {
       sandbox.restore();
   })
@@ -27,12 +27,12 @@ describe('Game', function () {
             x: 1,
             y: 10,
         }
-        const game = new Game({
+        FoodComponent.setParams({
             ctx: dummyContext,
         });
-        game.food = food;
+        FoodComponent.food = food;
 
-        game.updateFood();
+        FoodComponent.updateFood();
 
         assert.equal(contextStubDrawImage.calledWithExactly(food.image, food.x, food.y), true);
     });
@@ -40,11 +40,11 @@ describe('Game', function () {
     it('should call context as expected with food', function () {
         sandbox.stub(Utilities, 'createImage');
 
-        const game = new Game({
+        FoodComponent.setParams({
             ctx: dummyContext,
         });
 
-        game.updateFood();
+        FoodComponent.updateFood();
 
         assert.equal(contextStubDrawImage.called, true);
     });
