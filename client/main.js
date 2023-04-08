@@ -1,6 +1,10 @@
 const {CANVAS_WIDTH, CANVAS_HEIGHT, LINK_WIDTH} = require('./enums/length');
+const { EVENT_TYPES } = require('./enums/events');
+
 const SnakePlayer = require('./components/player');
 const Game = require('./components/game');
+
+const Event = require('./event/event');
 
 const canvas = document.getElementById('snakeCanvas');
 
@@ -35,6 +39,9 @@ const playerManual = new SnakePlayer({
     initialPositionY: 4 * LINK_WIDTH,
 });
 players = [playerManual, playerAutomated];
+
+Event.addListener(EVENT_TYPES.UPDATE_FOOD, () => console.log('update food event triggered...'))
+Event.addListener(EVENT_TYPES.GAME_STARTED, () => console.log('game started...'))
 
 const game = new Game(players, ctx, 'images/link.png');
 game.start();

@@ -1,5 +1,9 @@
 const { CANVAS_HEIGHT, CANVAS_WIDTH } = require('../enums/length');
+const { EVENT_TYPES } = require('../enums/events');
+
 const { getXYCordinateOfFood } = require('../utilities/utilities');
+
+const Event = require('../event/event');
 const Link = require('../model/objects');
 
 function Game(players, ctx, imageSrc) {
@@ -17,10 +21,14 @@ Game.prototype.updateFood = function() {
         this.food = food;
     }
 
+    Event.emit(EVENT_TYPES.UPDATE_FOOD, { food: this.food });
+
     this.ctx.drawImage(this.food.image, this.food.x, this.food.y);
 }
 
 Game.prototype.start = function() {
+    Event.emit(EVENT_TYPES.GAME_STARTED, 'game started.');
+
     setInterval(() => {
         // 1. Clear canvas.
         this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
