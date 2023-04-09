@@ -55,7 +55,7 @@ describe('Utilities', () => {
     it('x, y should within canvas limits', () => {
       for (let i = 0; i < 100; i++) {
          const [x, y] = Utilities.getXYCordinateOfFood();
-          console.log('dasdas', x, y);
+
          assert.equal(x < CANVAS_WIDTH, true);
          assert.equal(y < CANVAS_HEIGHT, true);
       }
