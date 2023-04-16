@@ -1,9 +1,9 @@
 const assert = require('assert');
 const { getContentType, getFilePath } = require('../../../server/utils/utils');
 
-describe('Utils', function () {
-  describe('getContentType', function () {
-    it('should return expected content type', function () {
+describe('Utils', () => {
+  describe('getContentType', () => {
+    it('should return expected content type', () => {
       const testCases = [
         { filepath: 'index.html', expected: 'text/html' },
         { filepath: 'index.js', expected: 'text/javascript' },
@@ -23,7 +23,7 @@ describe('Utils', function () {
   });
 
   describe('getFilePath', function () {
-    it('should return expected file path', function () {
+    it('should return expected file path', () => {
       const url = '/index';
       const expected = './index';
 
