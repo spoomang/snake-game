@@ -4,6 +4,7 @@ const path = require('path');
 
 const {getContentType, getFilePath} = require('./utils/utils');
 const regex = require('./utils/regex');
+const handler = require('./handler')
 
 const PORT = 8080;
 
@@ -11,8 +12,6 @@ http.createServer((request, response) => {
     let filePath;
 
     const url = request.url;
-
-
     if (regex.isCodeResource(url) || url === '/') {
         if (url === '/') {
             filePath = './dist/index.html';
@@ -24,9 +23,10 @@ http.createServer((request, response) => {
             const contentType = getContentType(filePath);
     
             response.writeHead(200, { 'Content-Type': contentType });
-                response.end(content, 'utf-8');
+            response.end(content, 'utf-8');
         });
+    } else {
+        handler.handle(url, request, response);
     }
-
 
 }).listen(PORT);
