@@ -1,3 +1,5 @@
+const baseUrl = 'http://localhost:8080';
+
 async function callAPI(request) {
     const { path, urlParamMap } = request;
 
@@ -8,7 +10,7 @@ async function callAPI(request) {
       
 
     try {
-        const response = await fetch(`http://localhost:8080/${path}?${urlParamString}`);
+        const response = await fetch(`${baseUrl}/${path}?${urlParamString}`);
         const jsonData = await response.json();
         return jsonData
     } catch (error) {
