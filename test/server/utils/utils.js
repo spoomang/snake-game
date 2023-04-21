@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { getContentType, getFilePath } = require('../../../server/utils/utils');
+const { getContentType, getFilePath, getUrlToComponents } = require('../../../server/utils/utils');
 
 describe('Utils', () => {
   describe('getContentType', () => {
@@ -22,7 +22,7 @@ describe('Utils', () => {
     });
   });
 
-  describe('getFilePath', function () {
+  describe('getFilePath',  () => {
     it('should return expected file path', () => {
       const url = '/index';
       const expected = './index';
@@ -31,5 +31,44 @@ describe('Utils', () => {
 
       assert.equal(actual, expected);
     });  
-  });
+  })
+
+  describe('getUrlToComponents',  () => {
+    it('should return expected urls and params', () => {
+      const url = '/abc/direction?key1=value1&key2=value2&key3=';
+
+      const expected = {
+        path: '/abc/direction',
+        paramsMap: {
+          key1 : 'value1',
+          key2 : 'value2',
+          key3 : '',
+        },
+      }
+
+      const actual = getUrlToComponents(url);
+
+      assert.deepEqual(actual, expected);
+    });
+
+    it('should return expected url when no param', () => {
+      const urls = [
+        '/abc/direction?',
+        '/abc/direction',
+        '/abc/direction?abc',
+        '/abc/direction?abc/def',
+      ];
+
+      const expected = {
+        path: '/abc/direction',
+        paramsMap: {},
+      }
+
+      urls.forEach(url => {
+        const actual = getUrlToComponents(url);
+
+        assert.deepEqual(actual, expected);
+      })
+    }); 
+  }); 
 });

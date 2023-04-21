@@ -1,3 +1,4 @@
+const API = require('../api');
 const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = require('../enums/direction');
 
 function SnakeController(player) {
@@ -10,7 +11,6 @@ SnakeController.prototype.manual = function(keyCode) {
         return
     }
 
-    let x, y, direction;
     const currentDirection = this.player.head.direction;
     switch(keyCode) {
         case 40:
@@ -40,31 +40,14 @@ SnakeController.prototype.manual = function(keyCode) {
     }
 }
 
-SnakeController.prototype.automate = function() {
-    const randomNum = Math.floor(Math.random() * 2);
+SnakeController.prototype.automate = async function() {
+    const currentDirection = this.player.head.direction;
 
-    switch(this.player.head.direction) {
-        case DIRECTION_LEFT:
-        case DIRECTION_RIGHT:
-            if (randomNum == 0) {
-                this.player.head.direction = DIRECTION_UP;
-            } else {
-                this.player.head.direction = DIRECTION_DOWN;
-            }
-
-            break;
-        case DIRECTION_DOWN:
-        case DIRECTION_UP:
-            if (randomNum == 0) {
-                this.player.head.direction = DIRECTION_LEFT;
-            } else {
-                this.player.head.direction = DIRECTION_RIGHT;
-            }
-            break;
-    
-        default:
-            break;
-    }
+    const response = await API.callAPI({
+        path: 'snake/automated/direction',
+        urlParamMap: { currentDirection },
+    });
+    this.player.head.direction = response.newDirection;
 }
 
 module.exports = SnakeController;

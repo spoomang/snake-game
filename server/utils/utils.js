@@ -31,7 +31,36 @@ function getFilePath(fileUrl) {
     return "."+fileUrl;
 }
 
+function getUrlToComponents(url) {
+    const result = {
+        path: '',
+        paramsMap: {},
+    }
+    if (!url) {
+        return result;
+    }
+
+    const urlComponents = url.split('?');
+    if (urlComponents.length == 0) {
+        return result;
+    }
+    result.path = urlComponents[0];
+
+    if (urlComponents.length > 1) {
+        const pathParamsList = urlComponents[1].split('&');
+        for (let i = 0; i < pathParamsList.length; i++) {
+            const keyValue = pathParamsList[i].split('=');
+            if (keyValue.length == 2) {
+                result.paramsMap[keyValue[0]] = keyValue[1];
+            }
+        }
+    }
+
+    return result;
+}
+
 module.exports = {
     getContentType,
     getFilePath,
+    getUrlToComponents,
 };

@@ -1,12 +1,14 @@
 const http = require('http');
 const fs = require('fs');
-const path = require('path');
 
 const {getContentType, getFilePath} = require('./utils/utils');
 const regex = require('./utils/regex');
 const handler = require('./handler')
+const direction = require('./service/direction')
 
 const PORT = 8080;
+
+handler.add('/snake/automated/direction', direction.getDirection);
 
 http.createServer((request, response) => {
     let filePath;
