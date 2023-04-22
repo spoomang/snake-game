@@ -3,3 +3,8 @@
     margin: 0 auto;
     display: block;
 }
+
+#additionalInfo {
+    position: absolute;
+    top: 50%;
+}

@@ -9,6 +9,11 @@ const FoodController = require('./controller/food');
 const Event = require('./event/event');
 
 const canvas = document.getElementById('snakeCanvas');
+const additionalInfo = document.getElementById('additionalInfo');
+
+const para = document.createElement("p");
+const node = document.createTextNode("This is new.");
+additionalInfo.appendChild(node);
 
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
