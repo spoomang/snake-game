@@ -11,8 +11,7 @@ const Event = require('./event/event');
 const canvas = document.getElementById('snakeCanvas');
 const additionalInfo = document.getElementById('additionalInfo');
 
-const para = document.createElement("p");
-const node = document.createTextNode("This is new.");
+const node = document.createTextNode("a - Create new snake, b - create automated snake");
 additionalInfo.appendChild(node);
 
 canvas.width = CANVAS_WIDTH;
@@ -31,33 +30,51 @@ function resize() {
 }
 window.addEventListener('load', resize, false);
 
-const playerAutomated = new SnakePlayer({
-    imageSrc: 'images/link.png',
-    automated: true, 
-    ctx: ctx,
-    initialPositionX: 0,
-    initialPositionY: 0,
-});
-const playerManual = new SnakePlayer({
-    imageSrc: 'images/link.png', 
-    automated: false,
-    ctx: ctx, 
-    initialPositionX: 0,
-    initialPositionY: 4 * LINK_WIDTH,
-});
-
-const controllerAutomated = new SnakeController(playerAutomated);
-const controllerManual = new SnakeController(playerManual);
-
-const contollers = [controllerManual, controllerAutomated];
-
 Event.addListener(EVENT_TYPES.UPDATE_FOOD, () => console.log('update food event triggered...'))
 Event.addListener(EVENT_TYPES.GAME_STARTED, () => console.log('game started ...'))
 
 FoodController.setParams({ ctx, foodImageSrc: 'images/link.png' })
 
 const game = new Game({
-    ctx, 
-    contollers
+    ctx,
 });
-game.start();
+
+window.addEventListener('keydown', (e) => {
+    const keyCode = e.which || event.keyCode;
+    console.log("Dadasdasd   ", keyCode);
+    switch (keyCode) {
+        case 32:
+            if (!game.stop) {
+                game.stopLoop();
+            } else {
+                game.start();
+            }
+            
+            break;
+        case 65: // Create new snake
+            const playerManual = new SnakePlayer({
+                imageSrc: 'images/link.png', 
+                automated: false,
+                ctx: ctx, 
+                initialPositionX: 0,
+                initialPositionY: 4 * LINK_WIDTH,
+            });
+            const controllerManual = new SnakeController(playerManual);
+            game.addController(controllerManual);
+            break;
+        case 66: // create automated snake
+            game.stopLoop();
+            const playerAutomated = new SnakePlayer({
+                imageSrc: 'images/link.png',
+                automated: true, 
+                ctx: ctx,
+                initialPositionX: 0,
+                initialPositionY: 0,
+            });
+            const controllerAutomated = new SnakeController(playerAutomated);
+            game.addController(controllerAutomated);
+            break;
+        default:
+            break;
+    }
+});

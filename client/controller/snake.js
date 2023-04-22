@@ -34,7 +34,7 @@ SnakeController.prototype.manual = function(keyCode) {
             }
             break;
         case 32:
-            this.player.player.pause = !this.player.player.pause;
+            this.player.pause = !this.player.pause;
         default:
             break;
     }
