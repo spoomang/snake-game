@@ -25,6 +25,18 @@ function SnakePlayer({ imageSrc, automated, ctx, initialPositionX, initialPositi
     this.pause = false;
     this.automated = automated
     this.ctx = ctx;
+    this.score = 0;
+}
+
+SnakePlayer.prototype.setScoreBoard = function(scoreBoardtext) {
+    this.scoreBoardtext = scoreBoardtext;
+}
+
+SnakePlayer.prototype.updateScore = function() {
+    this.score += 1;
+    if (this.scoreBoardtext) {
+        this.scoreBoardtext.textContent = this.score;
+    }
 }
 
 SnakePlayer.prototype.growIfAteFood = function(){
@@ -51,6 +63,7 @@ SnakePlayer.prototype.growIfAteFood = function(){
         this.links.push(newLink);
 
         FoodController.food = null;
+        this.updateScore();
     }
 }
 

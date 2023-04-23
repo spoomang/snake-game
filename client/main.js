@@ -7,7 +7,7 @@ const SnakeFactory = require('./factory/snake_factory');
 
 const FoodController = require('./controller/food');
 
-const Dashboard = require('./components/dashboard');
+const Dashboard = require('./components/nav/dashboard');
 
 const Event = require('./event/event');
 
@@ -38,48 +38,77 @@ const game = new Game({
     ctx,
 });
 
-window.addEventListener('keydown', (e) => {
-    const keyCode = e.which || event.keyCode;
-    console.log("keyCode   ", keyCode);
-    switch (keyCode) {
-        case 32:
-            if (!game.stop) {
-                game.stopLoop();
-            } else {
-                game.start();
-            }
-            
-            break;
-        case 65: // Create new snake
-            const playerController = SnakeFactory.create({
-                imageSrc: 'images/link.png', 
-                automated: false,
-                ctx: ctx, 
-                initialPositionX: 0,
-                initialPositionY: 4 * LINK_WIDTH,
-            });
-            game.addController({
-                name: 'player_1',
-                controller: playerController,
-            });
-            game.setControl({ name:'player_1', type: CONTROL.MANUAL })
-            break;
-        case 66: // create automated snake
-            game.stopLoop();
-            const controllerAutomated = SnakeFactory.create({
-                imageSrc: 'images/link.png',
-                automated: true, 
-                ctx: ctx,
-                initialPositionX: 0,
-                initialPositionY: 0,
-            });
-            game.addController({
-                name: 'player_automated',
-                controller: controllerAutomated,
-            });
-            game.setControl({ name:'player_automated', type: CONTROL.AUTOMATE })
-            break;
-        default:
-            break;
+Dashboard.setStartListener(() => {
+    if (game.stop) {
+        game.start();
     }
 });
+
+Dashboard.setStopListener(() => {
+    if (!game.stop) {
+        game.stop();
+    }
+});
+
+Dashboard.setPlayerListener((playerName, playerScore) => {
+    const playerController = SnakeFactory.create({
+        imageSrc: 'images/link.png', 
+        automated: false,
+        ctx: ctx, 
+        initialPositionX: 0,
+        initialPositionY: 4 * LINK_WIDTH,
+    });
+    playerController.player.setScoreBoard(playerScore);
+    game.addController({
+        name: playerName,
+        controller: playerController,
+    });
+    game.setControl({ name: playerName, type: CONTROL.MANUAL })
+});
+
+
+// window.addEventListener('keydown', (e) => {
+//     const keyCode = e.which || event.keyCode;
+//     console.log("keyCode   ", keyCode);
+//     switch (keyCode) {
+//         case 32:
+//             if (!game.stop) {
+//                 game.stopLoop();
+//             } else {
+//                 game.start();
+//             }
+            
+//             break;
+//         case 65: // Create new snake
+//             const playerController = SnakeFactory.create({
+//                 imageSrc: 'images/link.png', 
+//                 automated: false,
+//                 ctx: ctx, 
+//                 initialPositionX: 0,
+//                 initialPositionY: 4 * LINK_WIDTH,
+//             });
+//             game.addController({
+//                 name: 'player_1',
+//                 controller: playerController,
+//             });
+//             game.setControl({ name:'player_1', type: CONTROL.MANUAL })
+//             break;
+//         case 66: // create automated snake
+//             game.stopLoop();
+//             const controllerAutomated = SnakeFactory.create({
+//                 imageSrc: 'images/link.png',
+//                 automated: true, 
+//                 ctx: ctx,
+//                 initialPositionX: 0,
+//                 initialPositionY: 0,
+//             });
+//             game.addController({
+//                 name: 'player_automated',
+//                 controller: controllerAutomated,
+//             });
+//             game.setControl({ name:'player_automated', type: CONTROL.AUTOMATE })
+//             break;
+//         default:
+//             break;
+//     }
+// });
