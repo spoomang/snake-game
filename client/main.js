@@ -1,18 +1,16 @@
 const {CANVAS_WIDTH, CANVAS_HEIGHT, LINK_WIDTH} = require('./enums/length');
 const { EVENT_TYPES } = require('./enums/events');
 
-const SnakePlayer = require('./components/snake');
 const Game = require('./components/game');
-const SnakeController = require('./controller/snake');
+const SnakeFactory = require('./factory/snake_factory');
+
 const FoodController = require('./controller/food');
+
+const Dashboard = require('./components/dashboard');
 
 const Event = require('./event/event');
 
 const canvas = document.getElementById('snakeCanvas');
-const additionalInfo = document.getElementById('additionalInfo');
-
-const node = document.createTextNode("a - Create new snake, b - create automated snake");
-additionalInfo.appendChild(node);
 
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
@@ -41,7 +39,7 @@ const game = new Game({
 
 window.addEventListener('keydown', (e) => {
     const keyCode = e.which || event.keyCode;
-    console.log("Dadasdasd   ", keyCode);
+    console.log("keyCode   ", keyCode);
     switch (keyCode) {
         case 32:
             if (!game.stop) {
@@ -52,26 +50,24 @@ window.addEventListener('keydown', (e) => {
             
             break;
         case 65: // Create new snake
-            const playerManual = new SnakePlayer({
+            const playerController = SnakeFactory.create({
                 imageSrc: 'images/link.png', 
                 automated: false,
                 ctx: ctx, 
                 initialPositionX: 0,
                 initialPositionY: 4 * LINK_WIDTH,
             });
-            const controllerManual = new SnakeController(playerManual);
-            game.addController(controllerManual);
+            game.addController(playerController);
             break;
         case 66: // create automated snake
             game.stopLoop();
-            const playerAutomated = new SnakePlayer({
+            const controllerAutomated = SnakeFactory.create({
                 imageSrc: 'images/link.png',
                 automated: true, 
                 ctx: ctx,
                 initialPositionX: 0,
                 initialPositionY: 0,
             });
-            const controllerAutomated = new SnakeController(playerAutomated);
             game.addController(controllerAutomated);
             break;
         default:
