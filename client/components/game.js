@@ -1,16 +1,21 @@
 const { CANVAS_HEIGHT, CANVAS_WIDTH } = require('../enums/length');
 const { EVENT_TYPES } = require('../enums/events');
+const { CONTROL } = require('../enums/control');
 const Event = require('../event/event');
 const FoodController = require('../controller/food');
 
 function Game({ ctx }) {
-    this.contollers = [];
+    this.contollers = new Map();
     this.ctx = ctx;
     this.stop = true;
 }
 
-Game.prototype.addController = function(controller) {
-    this.contollers.push(controller);
+Game.prototype.addController = function({name, controller}) {
+    if (this.contollers.size == 2) {
+        console.log('Max player reached.');
+        return;
+    }
+    this.contollers.set(name, controller);
 }
 
 Game.prototype.start = function() {
@@ -25,27 +30,34 @@ Game.prototype.start = function() {
         this.executeSingleLoop();
     }, 200);
     this.gameLoop = gameLoop;
+}
 
-    for (const controller of this.contollers) {
-        if (controller.automated) {
+Game.prototype.setControl = function({ name, type }) {
+    const controller = this.contollers.get(name);
+    switch (type) {
+        case CONTROL.MANUAL:
+            window.addEventListener('keydown', (e) => {
+                const keyCode = e.which || event.keyCode;
+                controller.manual(keyCode);
+            });
+
+            break;
+        case CONTROL.AUTOMATE:
             const automateInterval = setInterval(() => {
                 controller.automate();
             }, 2000);
 
             this.automateInterval = automateInterval;
-        } else {
-            window.addEventListener('keydown', (e) => {
-                const keyCode = e.which || event.keyCode;
-                controller.manual(keyCode);
-            });
-        }
+            break;
+        default:
+            break;
     }
 }
 
 Game.prototype.executeSingleLoop = function() {
     // 1. Clear canvas.
     this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    for (const contoller of this.contollers) {
+    for (let [key, contoller] of this.contollers) {
         const player = contoller.player;
         // 2. Update Location of food.
         FoodController.updateFood();

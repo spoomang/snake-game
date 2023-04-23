@@ -1,5 +1,6 @@
 const {CANVAS_WIDTH, CANVAS_HEIGHT, LINK_WIDTH} = require('./enums/length');
 const { EVENT_TYPES } = require('./enums/events');
+const { CONTROL } = require('./enums/control');
 
 const Game = require('./components/game');
 const SnakeFactory = require('./factory/snake_factory');
@@ -57,7 +58,11 @@ window.addEventListener('keydown', (e) => {
                 initialPositionX: 0,
                 initialPositionY: 4 * LINK_WIDTH,
             });
-            game.addController(playerController);
+            game.addController({
+                name: 'player_1',
+                controller: playerController,
+            });
+            game.setControl({ name:'player_1', type: CONTROL.MANUAL })
             break;
         case 66: // create automated snake
             game.stopLoop();
@@ -68,7 +73,11 @@ window.addEventListener('keydown', (e) => {
                 initialPositionX: 0,
                 initialPositionY: 0,
             });
-            game.addController(controllerAutomated);
+            game.addController({
+                name: 'player_automated',
+                controller: controllerAutomated,
+            });
+            game.setControl({ name:'player_automated', type: CONTROL.AUTOMATE })
             break;
         default:
             break;
