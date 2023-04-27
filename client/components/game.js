@@ -7,7 +7,7 @@ const FoodController = require('../controller/food');
 function Game({ ctx }) {
     this.contollers = new Map();
     this.ctx = ctx;
-    this.stop = true;
+    this.isStop = true;
 }
 
 Game.prototype.addController = function({name, controller}) {
@@ -19,10 +19,10 @@ Game.prototype.addController = function({name, controller}) {
 }
 
 Game.prototype.start = function() {
-    if (!this.stop){
+    if (!this.isStop){
         return;
     }
-    this.stop = false;
+    this.isStop = false;
 
     Event.emit(EVENT_TYPES.GAME_STARTED, 'game started.');
 
@@ -71,10 +71,10 @@ Game.prototype.executeSingleLoop = function() {
 }
 
 Game.prototype.stopLoop = function() {
-    if (this.stop){
+    if (this.isStop){
         return;
     }
-    this.stop = true;
+    this.isStop = true;
 
     if (this.gameLoop) {
         clearInterval(this.gameLoop);

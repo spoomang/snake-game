@@ -34,4 +34,11 @@ Dashboard.prototype.setPlayerListener = function(fn) {
     });
 }
 
+Dashboard.prototype.setAutomaticPlayerListener = function(fn) {
+    this.playerInfo.automatedPlayerButton.addEventListener('click', () => {
+        this.playerInfo.addAutomaticButtonClick();
+        fn(this.playerInfo.playerAutomated, this.playerInfo.automatedPlayerScore);
+    });
+}
+
 module.exports = new Dashboard();

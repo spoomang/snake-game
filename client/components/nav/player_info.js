@@ -17,78 +17,53 @@ function PlayerInfo (additionalInfo){
     this.createPlayerButton = createPlayerButton;
     this.automatedPlayerButton = automatedPlayerButton;
 
-    
-    // createPlayerButton.addEventListener('click', (e) => {
-    //     const player1Info = document.createElement("div");
-
-    //     const player1Name = document.createElement("div");
-    //     player1Name.textContent = document.getElementById('player1').value;
-
-    //     const player1ScoreLabel = document.createElement("label");
-    //     player1ScoreLabel.textContent = 'score: ';
-
-    //     const player1Score = document.createElement("label");
-    //     player1Score.textContent = '0';
-
-    //     player1ScoreLabel.append(player1Score)
-
-    //     player1Info.appendChild(player1Name);
-    //     player1Info.appendChild(player1ScoreLabel);
-
-    //     playerInfo.appendChild(player1Info);
-
-    //     this.player1Score = player1Score;
-    //     this.player1 = player1Name;
-    // });
-
-
-    automatedPlayerButton.addEventListener('click', (e) => {
-        const player1Info = document.createElement("div");
-
-        const player1Name = document.createElement("div");
-        player1Name.textContent = "Automated player";
-
-        const player1ScoreLabel = document.createElement("label");
-        player1ScoreLabel.textContent = 'score: ';
-
-        const player1Score = document.createElement("label");
-        player1Score.textContent = '0';
-
-        player1ScoreLabel.append(player1Score)
-
-        player1Info.appendChild(player1Name);
-        player1Info.appendChild(player1ScoreLabel);
-
-        playerInfo.appendChild(player1Info);
-
-        this.automatedPlayerScore = player1Score;
-        this.playerAutomated = player1Name;
-    });
-
     additionalInfo.appendChild(playerInfo);
 };
 
 PlayerInfo.prototype.createButtonClick = function() {
-        const player1Info = document.createElement("div");
+    const player1Info = document.createElement("div");
 
-        const player1Name = document.createElement("div");
-        player1Name.textContent = document.getElementById('player1').value;
+    const player1Name = document.createElement("div");
+    player1Name.textContent = document.getElementById('player1').value;
 
-        const player1ScoreLabel = document.createElement("label");
-        player1ScoreLabel.textContent = 'score: ';
+    const player1ScoreLabel = document.createElement("label");
+    player1ScoreLabel.textContent = 'score: ';
 
-        const player1Score = document.createElement("label");
-        player1Score.textContent = '0';
+    const player1Score = document.createElement("label");
+    player1Score.textContent = '0';
 
-        player1ScoreLabel.append(player1Score)
+    player1ScoreLabel.append(player1Score)
 
-        player1Info.appendChild(player1Name);
-        player1Info.appendChild(player1ScoreLabel);
+    player1Info.appendChild(player1Name);
+    player1Info.appendChild(player1ScoreLabel);
 
-        this.playerInfo.appendChild(player1Info);
+    this.playerInfo.appendChild(player1Info);
 
-        this.player1Score = player1Score;
-        this.player1 = player1Name;
+    this.player1Score = player1Score;
+    this.player1 = player1Name;
+}
+
+PlayerInfo.prototype.addAutomaticButtonClick = function() {
+    const player1Info = document.createElement("div");
+
+    const player1Name = document.createElement("div");
+    player1Name.textContent = "Automated player";
+
+    const player1ScoreLabel = document.createElement("label");
+    player1ScoreLabel.textContent = 'score: ';
+
+    const player1Score = document.createElement("label");
+    player1Score.textContent = '0';
+
+    player1ScoreLabel.append(player1Score)
+
+    player1Info.appendChild(player1Name);
+    player1Info.appendChild(player1ScoreLabel);
+
+    this.playerInfo.appendChild(player1Info);
+
+    this.automatedPlayerScore = player1Score;
+    this.playerAutomated = player1Name;
 }
 
 module.exports = PlayerInfo;

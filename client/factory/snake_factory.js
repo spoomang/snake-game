@@ -1,5 +1,5 @@
 // TODO
-// 4. create dashboard
+// 4. create dashboard <Half done>
 // 6. shift control to backend
 
 const SnakePlayer = require('../components/snake');

@@ -39,14 +39,14 @@ const game = new Game({
 });
 
 Dashboard.setStartListener(() => {
-    if (game.stop) {
+    if (game.isStop) {
         game.start();
     }
 });
 
 Dashboard.setStopListener(() => {
-    if (!game.stop) {
-        game.stop();
+    if (!game.isStop) {
+        game.stopLoop();
     }
 });
 
@@ -64,6 +64,24 @@ Dashboard.setPlayerListener((playerName, playerScore) => {
         controller: playerController,
     });
     game.setControl({ name: playerName, type: CONTROL.MANUAL })
+});
+
+Dashboard.setAutomaticPlayerListener((playerName, playerScore) => {
+    const playerController = SnakeFactory.create({
+        imageSrc: 'images/link.png', 
+        automated: false,
+        ctx: ctx, 
+        initialPositionX: 0,
+        initialPositionY: 4 * LINK_WIDTH,
+    });
+    playerController.player.setScoreBoard(playerScore);
+    game.stopLoop();
+    game.addController({
+        name: playerName,
+        controller: playerController,
+    });
+    game.setControl({ name: playerName, type: CONTROL.AUTOMATE })
+    game.start();
 });
 
 
