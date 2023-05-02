@@ -15,7 +15,12 @@ Game.prototype.addController = function({name, controller, type }) {
         console.log('Max player reached.');
         return false;
     }
-    console.log('dedas', this.contollers);
+
+    if (this.contollers.has(name)) {
+        console.log('Player already added.');
+        return false;
+    }
+
     this.contollers.set(name, controller);
     this.setControl({ name, type })
     
