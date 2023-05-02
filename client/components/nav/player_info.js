@@ -1,12 +1,12 @@
-const { createButton, createInput } = require('./util');
+const { createButton, createInput, createLabel } = require('./util');
 
-function PlayerInfo (additionalInfo){
+function PlayerInfo (additionalInfo) {
     const automatedPlayerButton = createButton({ id: 'addAutomatedPlayer', text: 'play with automated' });
     const createPlayerButton = createButton({ id: 'addPlayer', text: 'add player' });
     const player1Input = createInput({ id: 'player1', text: 'player 1' });
 
-    additionalInfo.appendChild(automatedPlayerButton);
-    additionalInfo.appendChild(createPlayerButton);
+    additionalInfo.appendChild(automatedPlayerButton.div);
+    additionalInfo.appendChild(createPlayerButton.div);
     additionalInfo.appendChild(player1Input);
 
     const playerInfo = document.createElement("div");
@@ -14,23 +14,20 @@ function PlayerInfo (additionalInfo){
 
     this.playerInfo = playerInfo;
 
-    this.createPlayerButton = createPlayerButton;
-    this.automatedPlayerButton = automatedPlayerButton;
+    this.createPlayerButton = createPlayerButton.button;
+    this.automatedPlayerButton = automatedPlayerButton.button;
 
     additionalInfo.appendChild(playerInfo);
 };
 
-PlayerInfo.prototype.createButtonClick = function() {
+PlayerInfo.prototype.createButtonClick = function({ name, scoreInfo }) {
     const player1Info = document.createElement("div");
 
     const player1Name = document.createElement("div");
-    player1Name.textContent = document.getElementById('player1').value;
+    player1Name.textContent = name;
 
-    const player1ScoreLabel = document.createElement("label");
-    player1ScoreLabel.textContent = 'score: ';
-
-    const player1Score = document.createElement("label");
-    player1Score.textContent = '0';
+    const player1ScoreLabel = scoreInfo.label;
+    const player1Score = scoreInfo.score;
 
     player1ScoreLabel.append(player1Score)
 
@@ -43,17 +40,14 @@ PlayerInfo.prototype.createButtonClick = function() {
     this.player1 = player1Name;
 }
 
-PlayerInfo.prototype.addAutomaticButtonClick = function() {
+PlayerInfo.prototype.addAutomaticButtonClick = function({ name, scoreInfo }) {
     const player1Info = document.createElement("div");
 
     const player1Name = document.createElement("div");
-    player1Name.textContent = "Automated player";
+    player1Name.textContent = name;
 
-    const player1ScoreLabel = document.createElement("label");
-    player1ScoreLabel.textContent = 'score: ';
-
-    const player1Score = document.createElement("label");
-    player1Score.textContent = '0';
+    const player1ScoreLabel = scoreInfo.label;
+    const player1Score = scoreInfo.score;
 
     player1ScoreLabel.append(player1Score)
 

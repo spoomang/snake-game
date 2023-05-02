@@ -59,11 +59,11 @@ Dashboard.setPlayerListener((playerName, playerScore) => {
         initialPositionY: 4 * LINK_WIDTH,
     });
     playerController.player.setScoreBoard(playerScore);
-    game.addController({
+    return game.addController({
         name: playerName,
         controller: playerController,
+        type: CONTROL.MANUAL,
     });
-    game.setControl({ name: playerName, type: CONTROL.MANUAL })
 });
 
 Dashboard.setAutomaticPlayerListener((playerName, playerScore) => {
@@ -75,11 +75,9 @@ Dashboard.setAutomaticPlayerListener((playerName, playerScore) => {
         initialPositionY: 4 * LINK_WIDTH,
     });
     playerController.player.setScoreBoard(playerScore);
-    game.stopLoop();
-    game.addController({
+    return game.addController({
         name: playerName,
         controller: playerController,
+        type: CONTROL.AUTOMATE,
     });
-    game.setControl({ name: playerName, type: CONTROL.AUTOMATE })
-    game.start();
 });

@@ -10,12 +10,16 @@ function Game({ ctx }) {
     this.isStop = true;
 }
 
-Game.prototype.addController = function({name, controller}) {
+Game.prototype.addController = function({name, controller, type }) {
     if (this.contollers.size == 2) {
         console.log('Max player reached.');
-        return;
+        return false;
     }
+    console.log('dedas', this.contollers);
     this.contollers.set(name, controller);
+    this.setControl({ name, type })
+    
+    return true;
 }
 
 Game.prototype.start = function() {

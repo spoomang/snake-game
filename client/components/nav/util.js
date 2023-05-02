@@ -7,7 +7,7 @@ function createButton({ id, text }) {
 
     div.appendChild(button);
 
-    return button;
+    return { div, button };
 }
 
 function createInput({ id, text }) {
@@ -22,7 +22,16 @@ function createInput({ id, text }) {
     return div;
 }
 
+function createLabel({ id, text }) {
+    const input = document.createElement("label");
+    input.id = id;
+    input.textContent = text;
+
+    return input;
+}
+
 module.exports = {
     createButton,
     createInput,
+    createLabel,
 };
