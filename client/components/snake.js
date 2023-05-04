@@ -40,7 +40,7 @@ SnakePlayer.prototype.updateScore = function() {
 }
 
 SnakePlayer.prototype.growIfAteFood = function(){
-    if(ateFood(this.head.x, this.head.y, FoodController.food.x, FoodController.food.y)) {
+    if(FoodController.food && ateFood(this.head.x, this.head.y, FoodController.food.x, FoodController.food.y)) {
         const newLink = new Link(this.tail.x, this.tail.y, this.tail.direction, this.imageSrc);
         switch(newLink.direction) {
             case DIRECTION_RIGHT:

@@ -68,15 +68,16 @@ Game.prototype.executeSingleLoop = function() {
     this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     for (let [key, contoller] of this.contollers) {
         const player = contoller.player;
-        // 2. Update Location of food.
-        FoodController.updateFood();
 
-        // 3. Grow if snake eats food.
+        // 2. Grow if snake eats food.
         player.growIfAteFood();
 
-        // 4. Update snakes new location.
+        // 3. Update snakes new location.
         player.updateSnakeLocation();
     }
+
+    // 4. Update Food
+    FoodController.updateFood();
 }
 
 Game.prototype.stopLoop = function() {

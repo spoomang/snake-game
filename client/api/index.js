@@ -4,10 +4,11 @@ async function callAPI(request) {
     const { path, urlParamMap } = request;
 
     let urlParamString = '';
-    for (const property in urlParamMap) {
-        urlParamString += `${property}=${urlParamMap[property]}&`;
-      }
-      
+    if (urlParamMap) {
+        for (const property in urlParamMap) {
+            urlParamString += `${property}=${urlParamMap[property]}&`;
+        }
+    }
 
     try {
         const response = await fetch(`${baseUrl}/${path}?${urlParamString}`);

@@ -5,10 +5,12 @@ const {getContentType, getFilePath} = require('./utils/utils');
 const regex = require('./utils/regex');
 const handler = require('./handler')
 const direction = require('./service/direction')
+const food = require('./service/food')
 
 const PORT = 8080;
 
 handler.add('/snake/automated/direction', direction.getDirection);
+handler.add('/food/cordinates', food.getRandomCooridinatesForFood);
 
 http.createServer((request, response) => {
     let filePath;

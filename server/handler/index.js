@@ -16,7 +16,7 @@ Handler.prototype.handle = function(url, request, response) {
         request.pathParamsMap = paramsMap;
         this.handlerMap.get(path)(request, response);
     } else {
-        console.log('no path exist..');
+        console.log('no path exist..', path);
         response.writeHead(404, { 'Content-Type': "contentType" });
         response.end("Page does not exist", 'utf-8');
     }
