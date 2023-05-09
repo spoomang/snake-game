@@ -5,7 +5,6 @@ const { ateFood, updateLinkLocation } = require('../utilities/utilities');
 const { LINK_HEIGHT, LINK_WIDTH, BORDER_MARGIN } = require('../enums/length');
 const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = require('../enums/direction');
 
-
 function SnakePlayer({ imageSrc, automated, ctx, initialPositionX, initialPositionY }) {
     let startPositionX = !!initialPositionX ? initialPositionX : 0;
     let startPositionY = !!initialPositionY ? initialPositionY : 0;
@@ -26,10 +25,22 @@ function SnakePlayer({ imageSrc, automated, ctx, initialPositionX, initialPositi
     this.pause = false;
     this.automated = automated
     this.ctx = ctx;
+    this.score = 0;
+}
+
+SnakePlayer.prototype.setScoreBoard = function(scoreBoardtext) {
+    this.scoreBoardtext = scoreBoardtext;
+}
+
+SnakePlayer.prototype.updateScore = function() {
+    this.score += 1;
+    if (this.scoreBoardtext) {
+        this.scoreBoardtext.textContent = this.score;
+    }
 }
 
 SnakePlayer.prototype.growIfAteFood = function(){
-    if(ateFood(this.head.x, this.head.y, FoodController.food.x, FoodController.food.y)) {
+    if(FoodController.food && ateFood(this.head.x, this.head.y, FoodController.food.x, FoodController.food.y)) {
         const newLink = new Link(this.tail.x, this.tail.y, this.tail.direction, this.imageSrc);
         switch(newLink.direction) {
             case DIRECTION_RIGHT:
@@ -52,6 +63,7 @@ SnakePlayer.prototype.growIfAteFood = function(){
         this.links.push(newLink);
 
         FoodController.food = null;
+        this.updateScore();
     }
 }
 

@@ -1,7 +1,6 @@
+const API = require('../api');
 const { EVENT_TYPES } = require('../enums/events');
-
 const { getXYCordinateOfFood } = require('../utilities/utilities');
-
 const Event = require('../event/event');
 const Link = require('../model/objects');
 
@@ -13,11 +12,14 @@ FoodController.prototype.setParams = function({ ctx, foodImageSrc }) {
     this.foodImageSrc = foodImageSrc;
 }
 
-FoodController.prototype.updateFood = function() {
+FoodController.prototype.updateFood = async function() {
     if(!this.food) {
-        const cordinates = getXYCordinateOfFood();
-        const x = cordinates[0];
-        const y = cordinates[1];
+        const cordinates = await API.callAPI({
+            path: 'food/cordinates',
+        });
+
+        const x = cordinates.randX;
+        const y = cordinates.randY;
         const food = new Link(x, y, false, this.foodImageSrc);
         this.food = food;
 
