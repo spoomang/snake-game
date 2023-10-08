@@ -1,10 +1,12 @@
 # Snake Game
 
+# Prerequisite
+- install node js on the machine.
+
 # To Play the game
 - clone to local computer.
-- open index.html in any browser.
-- play the game using arrow controlls.
-
-# To Learn / Improve the code
-- This is a simple game made of very little js code.
-- Try to add various features such as collision with wall, scoring, game over on eating own body etc.
+- run  `npm run build` and then`npm start`
+- open http://localhost:8080/ in browser
+- enter player name and click on `add player` button.
+- press `play with automated` button.
+- press `start` button to start playing with automated snake. 
