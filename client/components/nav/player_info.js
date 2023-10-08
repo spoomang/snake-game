@@ -5,8 +5,14 @@ function PlayerInfo (additionalInfo) {
     const createPlayerButton = createButton({ id: 'addPlayer', text: 'add player' });
     const player1Input = createInput({ id: 'player1', text: 'player 1' });
 
-    additionalInfo.appendChild(automatedPlayerButton.div);
-    additionalInfo.appendChild(createPlayerButton.div);
+
+    const div  = document.createElement("div");
+    div.className = "outer";
+    div.appendChild(automatedPlayerButton.div);
+    div.appendChild(createPlayerButton.div);
+
+
+    additionalInfo.appendChild(div);
     additionalInfo.appendChild(player1Input);
 
     const playerInfo = document.createElement("div");

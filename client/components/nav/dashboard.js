@@ -5,8 +5,13 @@ const util = require('./util');
 function Dashboard() {
     const startButton = util.createButton({ id: 'start', text: 'start' });
     const stopButton = util.createButton({ id: 'stop', text: 'stop' });
-    additionalInfo.appendChild(startButton.div);
-    additionalInfo.appendChild(stopButton.div);
+
+    const div  = document.createElement("div");
+    div.className = "outer";
+    div.appendChild(startButton.div);
+    div.appendChild(stopButton.div);
+
+    additionalInfo.appendChild(div);
 
     this.startButton = startButton.button;
     this.stopButton = stopButton.button;

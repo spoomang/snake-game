@@ -1,7 +1,7 @@
 const baseUrl = 'http://localhost:8080';
 
 async function callAPI(request) {
-    const { path, urlParamMap } = request;
+    const { path, urlParamMap, body } = request;
 
     let urlParamString = '';
     if (urlParamMap) {
@@ -11,7 +11,9 @@ async function callAPI(request) {
     }
 
     try {
-        const response = await fetch(`${baseUrl}/${path}?${urlParamString}`);
+        console.log('dasdasd', body);
+        const response = await fetch(`${baseUrl}/${path}?${urlParamString}`, body);
+        console.log('dasdasd', response);
         const jsonData = await response.json();
         return jsonData
     } catch (error) {

@@ -8,3 +8,14 @@
     position: absolute;
     top: 50%;
 }
+
+.outer{
+    width:100%;
+    text-align: left;
+    padding-bottom: 10px;
+    
+}
+.inner{
+    display: inline-block;
+    padding: 2px;
+}

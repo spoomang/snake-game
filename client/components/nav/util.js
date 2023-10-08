@@ -4,8 +4,8 @@ function createButton({ id, text }) {
     const button = document.createElement("button");
     button.id = id;
     button.textContent = text;
-
     div.appendChild(button);
+    div.className = "inner";
 
     return { div, button };
 }
