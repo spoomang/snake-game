@@ -89,10 +89,6 @@ Game.prototype.stopLoop = function() {
     if (this.gameLoop) {
         clearInterval(this.gameLoop);
     }
-
-    if (this.automateInterval) {
-        clearInterval(this.automateInterval);
-    }
 }
 
 module.exports = Game;

@@ -6,11 +6,14 @@ const regex = require('./utils/regex');
 const handler = require('./handler')
 const direction = require('./service/direction')
 const food = require('./service/food')
+const snake = require('./service/snake');
 
 const PORT = 8080;
 
 handler.add('/snake/automated/direction', direction.getDirection);
 handler.add('/food/cordinates', food.getRandomCooridinatesForFood);
+handler.add('/players', snake.getSnakeDetails);
+handler.add('/players/add', snake.addSnakeDetails);
 
 http.createServer((request, response) => {
     let filePath;
