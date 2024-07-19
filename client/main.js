@@ -68,7 +68,7 @@ Dashboard.setPlayerListener((playerName, playerScore) => {
 
 Dashboard.setAutomaticPlayerListener((playerName, playerScore) => {
     const playerController = SnakeFactory.create({
-        imageSrc: 'images/link.png', 
+        imageSrc: 'images/red.png', 
         automated: false,
         ctx: ctx, 
         initialPositionX: 0,
